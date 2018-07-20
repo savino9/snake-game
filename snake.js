@@ -3,8 +3,8 @@ function snake() {
 	this.y = 0;
 	this.speedX = 1;
 	this.speedY = 0;
-	this.total = 1;
-	this.tale = [];
+	this.total = 0;
+	this.tail = [];
 
 	this.dir = function(x,y) {
 		this.speedX = x;
@@ -16,15 +16,21 @@ function snake() {
 		// console.log(d);
 		if (d < 1) {
 			this.total++;
-			console.log(this.total);
+			// console.log(this.total);
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 	this.update = function() {
+		if (this.total === this.tail.length) {
+			for (var i = 0; i < this.tail.length ; i++) {
+				this.tail[i] = this.tail[i+1];
+			}
+		}
+		this.tail[this.total-1] = createVector(this.x, this.y);
+
 		this.x = this.x + this.speedX*scl;
 		this.y = this.y + this.speedY*scl;
 
@@ -34,6 +40,9 @@ function snake() {
 
 	this.show = function() {
 		fill(255);
+		for (var i = 0; i < this.total ; i++) {
+			ellipse(this.tail[i].x, this.tail[i].y, scl, scl);	
+		}
 		ellipse(this.x, this.y, scl, scl);
 	}
 }
