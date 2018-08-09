@@ -1,10 +1,11 @@
 var s;
 var scl = 10;
+var totalScore = 0;
 
 var food;
 
 const cv = {
-	x:800,
+	x:500,
 	y:400,
 }
 
@@ -19,21 +20,22 @@ function setup() {
 
 // pick the location of the head and the food
 function pickLocation() {
-	var cols = floor(width/scl);
-	var rows = floor(height/scl);
+	var cols = floor(cv.x/scl);
+	var rows = floor(cv.y/scl);
 	food = createVector(floor(random(cols)), floor(random(rows)));	
-	
 	food.mult(scl);
 }
 
 // draw function is called all the time
 function draw() {
 	background(0);
+	s.gameOver();
 	s.update();
 	s.show();
 
 	if (s.eat(food)) {
 		pickLocation();
+		updateScore();
 	}
 
 	fill(255,0,0);
@@ -51,4 +53,11 @@ function keyPressed() {
 	}	else if (keyCode === LEFT_ARROW){
 		s.dir(-1,0);
 	};
+}
+
+// Score 
+function updateScore() {
+	var totalScore = 0;
+	totalScore++;
+	console.log(updateScore);
 }

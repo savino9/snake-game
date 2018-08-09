@@ -45,4 +45,24 @@ function snake() {
 		}
 		ellipse(this.x, this.y, scl, scl);
 	}
+
+	this.gameOver = function() {
+		for (var i = 0; i < this.tail.length; i++) {
+			var pos = this.tail[i];
+			var d = dist(this.x, this.y, pos.x, pos.y);
+			if (d < 1) {
+				console.log('starting over');
+				this.tail = [];
+				this.total = 0;
+				break;
+			}			
+			var g = dist(this.x,this.y, cv.x,cv.y);
+			if (g < 1){
+				console.log('hitting canvas');
+				this.tail = [];
+				this.total = 0;
+				break;
+			}
+		}
+	}
 }
